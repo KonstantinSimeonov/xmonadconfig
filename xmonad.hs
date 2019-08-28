@@ -1,5 +1,6 @@
 import XMonad
 import XMonad.Prompt
+import XMonad.Prompt.Shell
 import XMonad.Prompt.Window
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
@@ -48,7 +49,8 @@ keyBindings conf@XConfig {XMonad.modMask = modm} = M.fromList $
                 [ ((modm, xK_l), spawn "~/.xmonad/lock.sh")
                 , ((modm, xK_Return), spawn $ XMonad.terminal conf)
                 , ((modm, xK_space), sendMessage NextLayout)
-                , ((modm, xK_p), spawn "rofi -show drun -show-icons")
+                --, ((modm, xK_p), spawn "rofi -show drun -show-icons")
+                , ((modm, xK_p), shellPrompt myXPConfig)
                 , ((modm, xK_t), withFocused $ windows . W.sink)
                 , ((modm, xK_Left), spawn "xdotool mousemove 960 540")
                 , ((modm, xK_Right), spawn "xdotool mousemove 2880 540")
