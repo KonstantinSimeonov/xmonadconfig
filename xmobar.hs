@@ -1,10 +1,10 @@
-Config { font = "xft:Monospace:pixelsize=14:antialias=true"
+Config { font = "xft:Monospace:pixelsize=15:bold:antialias=true"
        , additionalFonts = []
        , borderColor = "black"
        , border = TopB
        , bgColor = "black"
        , fgColor = "grey"
-       , alpha = 0
+       , alpha = 164
        , position = Top
        , textOffset = -1
        , iconOffset = -1
@@ -13,10 +13,22 @@ Config { font = "xft:Monospace:pixelsize=14:antialias=true"
        , persistent = False
        , hideOnStart = False
        , iconRoot = "."
-       , allDesktops = True
+       , allDesktops = False
        , overrideRedirect = False
        , commands = [ Run Cpu ["-L","3","-H","50",
                                "--normal","green","--high","red"] 10
+                    , Run BatteryP ["BAT1"]
+                        [ "-t", "<acstatus>"
+                        , "-L", "20", "-H", "90"
+                        , "--low", "red"
+                        , "--normal", "yellow"
+                        , "--high", "green"
+                        , "--"
+                        , "-O", "<left><fc=#ffffff>%</fc> <fc=#00cfff>~<timeleft></fc>"
+                        , "-o", "<left><fc=#ffffff>%</fc> <fc=#ff7f00>~<timeleft></fc>"
+                        , "-i", "<fc=#00ff00>AC</fc>"
+                        , "-f", "ACAD/online"
+                        ] 30
                     , Run DynNetwork
                         [ "-t", "<dev>: <rx>/<tx> KB/s"
                         , "-L", "0", "-H", "256"
@@ -36,5 +48,5 @@ Config { font = "xft:Monospace:pixelsize=14:antialias=true"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "<fc=#ff0000>%XMonadLog%</fc> }{ %cpu% | %memory% * %swap% | <action=`gnome-terminal --active --full-screen -- nmtui connect`>NMTUI</action> | <action=`nm-connection-editor`>%dynnetwork%</action> | [%kbd%] | <action=`nautilus`>[<fc=#00aa00>Files</fc>]</action> | <fc=#ee9a00>%date%</fc> "
+       , template = "<fc=#ff0000>%XMonadLog%</fc> }{ %cpu% | %memory% * %swap% | <action=`nm-connection-editor`>%dynnetwork%</action> | [%kbd%] | <action=`nautilus`>[<fc=#00aa00>Files</fc>]</action> | %battery% | <fc=#ee9a00>%date%</fc> "
 }
