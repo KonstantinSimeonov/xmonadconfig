@@ -15,31 +15,27 @@ Config { font = "xft:Monospace:pixelsize=15:bold:antialias=true"
        , iconRoot = "."
        , allDesktops = False
        , overrideRedirect = False
-       , commands = [ Run Cpu ["-L","3","-H","50",
-                               "--normal","green","--high","red"] 10
-                    , Run BatteryP ["BAT1"]
-                        [ "-t", "<acstatus>"
-                        , "-L", "20", "-H", "90"
-                        , "--low", "red"
-                        , "--normal", "yellow"
-                        , "--high", "green"
-                        , "--"
-                        , "-O", "<left><fc=#ffffff>%</fc> <fc=#00cfff>~<timeleft></fc>"
-                        , "-o", "<left><fc=#ffffff>%</fc> <fc=#ff7f00>~<timeleft></fc>"
-                        , "-i", "<fc=#00ff00>AC</fc>"
-                        , "-f", "ACAD/online"
-                        ] 30
+       , commands = [ Run Cpu
+                      ["-L","3","-H","50"
+                      , "--normal", "green", "--high", "red"] 10
+                    , Run Battery
+                      [ "-t", "<acstatus>: <left>%"
+                      , "--"
+                      , "-O", "AC"
+                      , "-o", "Bat"
+                      , "-h", "green"
+                      , "-l", "red"
+                      ] 10
                     , Run DynNetwork
-                        [ "-t", "<dev>: <rx>/<tx> KB/s"
-                        , "-L", "0", "-H", "256"
-                        , "--low", "cyan"
-                        , "--normal", "red"
-                        , "--high", "green"
-                        ] 30
+                      [ "-t", "<dev>: <rx>/<tx> KB/s"
+                      , "-L", "0", "-H", "256"
+                      , "--low", "cyan"
+                      , "--normal", "red"
+                      , "--high", "green"
+                      ] 30
                     , Run Memory ["-t","Mem: <usedratio>%"] 10
                     , Run Swap [] 10
                     , Run Com "uname" ["-s","-r"] "" 36000
-                    , Run Com "/home/kon/vpn_status.sh" [] "vpnactive" 30
                     , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
                     , Run Kbd [ ("us", "<fc=#7f7fff>EN</fc>")
                               , ("bg(phonetic)", "<fc=#ffff00>BG</fc>")

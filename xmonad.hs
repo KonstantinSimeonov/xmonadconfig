@@ -31,7 +31,7 @@ myXPConfig =
 
 main =
     xmonad $ docks defaultConfig
-        { terminal    = "gnome-terminal"
+        { terminal    = "gnome-terminal --hide-menubar"
         , borderWidth = 0
         , modMask = mod4Mask
         , manageHook = myManageHook
